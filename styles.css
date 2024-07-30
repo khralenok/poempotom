@@ -1,0 +1,490 @@
+body{
+    position: fixed;
+    top:0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    font-family: 'Murecho', sans-serif;
+    margin: 0px;
+    color: #151922;
+    overflow: hidden;
+}
+
+.container{
+    padding: 0px;
+    margin: auto;
+    display: flex;
+    flex-direction:row;
+    flex-wrap: wrap;
+    width:1200px;
+    height: 96vh;
+}
+
+/* ОГЛАВЛЕНИЕ*/
+
+.left-column, .right-column{
+    order: 1;
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    text-align: right;
+}
+
+.right-column{ 
+    order: 3;
+    text-align: left;
+}
+
+.left-column span, .right-column span{
+    content: "";
+    height: 50%;
+}
+
+/* СТИХИ */
+
+.poems-list{
+    font-size: 20px;
+    list-style: none;
+    padding: 0px;
+}
+
+.poems-list li{
+    padding: 8px;
+}
+
+.poems-list li:hover{
+    font-weight: 600;
+}
+
+.poem-container{
+    order:2;
+    width:600px;
+    height: 94vh;
+    display: flex;
+    flex-direction: column;
+    align-content:center;
+    overflow: auto;
+    align-self:center; 
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;
+}
+.poem-container::-webkit-scrollbar {
+    display: none;
+  }
+
+.poem-container span{
+    content: "";
+    height: 50%;
+}
+
+.poem{
+    display: block;
+    padding:40px 0 40px 40px;
+    font-size: 20px;    
+}
+
+.poem b{
+    font-size: 26px;
+}
+
+#poem-filter{
+    display: none;
+}
+
+/* ИЛЛЮСТРАЦИИ*/
+
+.illustration{
+    order: 2;
+    width: 600px;
+    height: 94vh;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.illustration main{
+    height: 70vh;
+}
+
+.illustration img{
+margin: 0px;
+display: block;
+width: 100%;
+}
+
+#page-filter{
+    position: fixed;
+    bottom:6vh;
+    left:0px;
+    width:100vw;
+    height: 80px;
+    background: linear-gradient(rgba(255,255,255,0),rgba(255,255,255,1) 70%);
+    z-index: 9999;
+}
+
+
+/* МЕНЮ */
+
+.menu{
+    position: fixed;
+    bottom:0;
+    left:0;
+    display: flex;
+    flex-direction: row;
+    border: solid 1px #151922;;
+    width:100vw;
+    height: 6vh;
+    text-align: center;
+    line-height: 6vh;
+    font-size: 24px;
+    background-color: white;
+    z-index: 9999;
+}
+.menu span{
+    width: 35%;
+}
+#previous, #home, #next{
+    width: 10%;
+}
+#previous a, #home a, #next a{
+    text-decoration: none;
+    font-weight: 600;
+}   
+
+#previous a:visited, #home a:visited, #next a:visited{ 
+    color: #151922
+} 
+
+#previous a:link, #home a:link, #next a:link{ 
+    color: #151922
+} 
+
+#home a{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 32px;
+}
+#copyrights-container{
+    width: 100%;
+    order:4;
+}
+
+#copyrights{
+    color: grey;
+    font-weight: 300;
+    text-align: center;
+}
+
+#copyrights a{
+    color: grey;
+    font-weight: 600;
+}
+
+#copyrights a:visited, #copyrights a:link{
+    color: grey;
+    font-weight: 600;
+}
+
+#copyrights a:hover{
+    color: #ee4b2b;
+}
+
+/* МАЛЕНЬКИЕ ДЕСКТОПЫ */
+
+@media only screen and (max-width: 1200px) and (min-width: 960px){
+    .container{
+        width:960px;
+    }
+    .illustration, .poem-container{
+        width: 480px;
+    }
+    .right-column, .left-column{
+        width: 240px;
+    }
+}
+
+/* ПЛАНШЕТЫ ВЕРТИКАЛКА */
+
+@media only screen and (max-width: 960px) and (min-width: 640px) and (orientation: portrait){
+    .container{
+        width:640px;
+    }  
+
+    /*ОГЛАВЛЕНИЕ*/
+    
+    .right-column, .left-column{
+        text-align: right;
+        order:3;
+        padding: 0 16vw 0 0;
+        width: 34vw;
+        height: 40vh;
+    }
+
+    .left-column{
+        text-align: left;
+        padding: 0 00px 0 16vw;
+        order:2;
+    } 
+
+    .right-column span{
+        display: none;
+    }
+
+    .poems-list{
+        margin: 0;
+        font-size: 22px;
+    }
+
+    .poems-list li{
+        padding: 16px 0 16px 0;
+    }
+
+    .left-column span, .right-column span{
+        display: none;
+    }
+
+    /*СТИХ*/
+
+    .poem-container{
+        height: 47vh;
+    }
+
+    .poem{
+        margin: auto;
+    }
+
+    #poem-filter{
+        position: fixed;
+        top:47vh;
+        left:0;
+        width: 640px;
+        display: block;
+        background: linear-gradient(rgba(255,255,255,1),rgba(255,255,255,0) 70%);
+        z-index: 9999;
+    }
+
+    .poem p::after{
+        content:" ";
+        height: 24px;
+    }
+
+    /*ИЛЛЮСТРАЦИЯ*/
+
+    .illustration{
+        order:1;
+        height: 47vh;
+        width: 100%;
+    } 
+    .illustration img{
+        order:1;
+        width: 47vh;
+    } 
+}
+
+/* ПЛАНШЕТЫ ГОРИЗОНТАЛКА */
+
+@media only screen and (max-width: 960px) and (min-width: 640px) and (orientation: landscape){
+    .container{
+        width:100vw;
+    }
+
+    .illustration{
+        width: 50vw;
+        height: 94vh;
+        order:2;
+    }
+
+    .poems-list{
+        font-size: 20px;
+    }
+
+    .poem-container{
+        width: 50vw;
+    }
+
+    .poem{
+        width:50vw;
+        padding: 0;
+    }
+
+    .poem p{
+        padding: 2vw;
+    }
+
+    .poem p::after{
+        content:" ";
+        height: 24px;
+    }
+
+    .right-column,.left-column{
+        width:25vw;
+    }
+}
+
+
+/* МОБИЛЬНЫЕ ГОРИЗОНТАЛКА */
+
+@media only screen and (max-width: 640px) and (min-width: 480px) and (orientation: landscape){
+    .container{
+        width:100vw;
+        height: 8wh;
+    }
+
+    .menu{
+        height: 8vh;
+    }
+
+    .illustration{
+        width: 50vw;
+        height: 92vh;
+        order:2;
+    }
+
+    .illustration img{
+        width: 92vh;
+        height: 92vh;
+    }
+    
+    .poems-list{
+        font-size: 16px;
+    }
+
+    .poem-container{
+        width: 50vw;
+        height: 92vh;
+    }
+
+    .poem{
+        width:50vw;
+    }
+
+    .poem p{
+        margin: 0;  
+        font-size: 18px;
+    }
+
+    .poem p::after{
+        content:" ";
+        height: 24px;
+    }
+
+    .right-column, .left-column{
+        width:25vw;
+    }
+
+    #page-filter{
+        height: 40px;
+    }
+
+    #copyrights{
+        font-size: 14px;
+        bottom: 12px;
+    }
+}   
+    
+/* МОБИЛЬНЫЕ ВЕРТИКАЛКА */
+
+@media only screen and (max-width: 480px){
+
+    .container{
+        width:320px;
+        height: 90vh;
+    }
+
+    .illustration{
+        order: 1;
+        width: 300px;
+        height: 47vh;
+        padding: 0 10px 0 10px;
+    }
+
+    #poem-filter{
+        position: fixed;
+        top:47vh;
+        left:0;
+        width: 320px;
+        display: block;
+        background: linear-gradient(rgba(255,255,255,1),rgba(255,255,255,0) 70%);
+        z-index: 9998;
+    }
+
+    .poems-list li{
+        padding: 6px 0 6px 0;
+    }
+
+    .poem-container{
+        order:2;
+        width:320px;
+        height: 47vh;
+    }
+
+    .poem-container span{
+        display: none;
+    }
+
+    .poem{
+        font-size: 18px;
+        padding: 10px 20px 10px 20px;    
+    }
+
+    .poem p{
+        margin: 0;
+    }
+
+    .poem p::after{
+        content:" ";
+        line-height: 148px;
+    }
+
+    .poem b{
+        font-size: 22px;
+    }
+
+
+    .left-column{
+        order: 2;
+        width:150px;
+        padding:0 0px 0 20px;
+        text-align: left;
+    }
+
+    .right-column{
+        order: 3;
+        width:130px;
+        padding:0 20px 0 0;
+        text-align: right;
+    }
+
+    .right-column span, .left-column span{
+       display: none;
+    }
+
+    ul{
+        font-size: 16px;
+        margin: 0;
+    }
+
+    ul a{
+        font-size: 16px;
+    }
+
+
+    .menu span{    
+        display: none;
+    }
+    
+    #previous, #home, #next{
+        width: 33.3%;
+    }
+
+    #copyrights{
+        font-size: 14px;
+        margin: 2vh 0 8vh 0;
+    }
+    
+    #page-filter{
+        height: 40px;
+    }
+    #copyrights-container{
+        height:15vh;
+    }
+}
