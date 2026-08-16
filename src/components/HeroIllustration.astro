@@ -1,0 +1,252 @@
+<div id="interactive-area">
+  <svg
+    id="head"
+    width="256"
+    height="256"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 256 256"
+  >
+    <path
+      id="hair-dynamic-back-1"
+      d="M76,121c-10,24-14,51-51,59.5,50,30.8,92.4-3.4,51-59.5Z"></path>
+    <path
+      id="hair-dynamic-back-2"
+      d="M124,123c-44,9-59,56-66,91,57,6,88-47,66-91Z"></path>
+    <path
+      id="hair-dynamic-back-3"
+      d="M132,123c44,9,59,56,66,91-57,6-88-47-66-91Z"></path>
+    <path
+      id="hair-dynamic-back-4"
+      d="M180,121c10,24,14,51,51,59.5-50,30.8-92.4-3.4-51-59.5Z"></path>
+    <path
+      id="hair-static-back"
+      d="M172,166c-7,8-44,28-44,28,0,0-37-20-44-28-7.1-8.1-37.2-63-28.3-94,11.3-39.1,40.5-64.4,72.3-56,31.8-8.4,61,16.9,72.3,56,8.9,31-21.2,85.9-28.3,94Z"
+    ></path>
+    <path d="M128,256H39.1c19-29,52-45,89-45.2,37,.2,70,16.2,89,45.2h-89Z"
+    ></path>
+    <path
+      d="M128,233c19,0,37-3,37-25s-17-25-37-25.1c-20,0-37,3.1-37,25.1s18,25,37,25Z"
+      style="stroke: #fff; stroke-miterlimit: 10; stroke-width: 2px;"></path>
+    <path
+      d="M146,195c0,8-36,8-36,0v-18h36v18Z"
+      style="fill: #fff; stroke: #000; stroke-miterlimit: 10; stroke-width: 2px;"
+    ></path>
+    <path
+      d="M128,25c37,0,58,22,58,61v19c2-2,7-2,11,0s6,13,4,21c-2,8-7,14-14,14s-7-2-7-2c0,10-29,49-52,49-23,0-52-39-52-49,0,0-3,1.9-7,2-7,0-12-6-14-14s0-19,4-21,9-2,11,0v-19c0-39,21-61,58-61Z"
+      style="fill: #fff; stroke: #000; stroke-miterlimit: 10; stroke-width: 2px;"
+    ></path>
+    <path d="M146,157.1c-13-3.1-23-3.1-36.1,0,13-12.1,23-12.1,36.1,0Z"></path>
+    <path d="M119,163c5,1,13,1,18.1,0-5,5-13,5-18.1,0Z"></path>
+    <path d="M119,135c6,3,12,3,18,0,0,9-18,9-18,0Z"></path>
+    <path d="M174,97c-7-6-15-9-28-3v-7c11-5,27,1,28,10Z"></path>
+    <path d="M82,97c7-6,15-9,28-3v-7c-11-5-27,1-28,10Z"></path>
+    <path id="eye-left-fill" d="M114,108c-6-7-21-7-27,0,6,7,20,7,27,0Z"></path>
+    <circle id="eye-left" cx="100.5" cy="108" r="6.5" style="fill: #fff;"
+    ></circle>
+    <path
+      id="eye-left-line"
+      d="M114,108c-6-7-21-7-27,0,6,7,20,7,27,0Z"
+      style="fill: none; stroke: #000; stroke-miterlimit: 10; stroke-width: 2px;"
+    ></path>
+    <path id="eye-right-fill" d="M142,108c6-7,21-7,27,0-6,7-20,7-27,0Z"></path>
+    <circle id="eye-right" cx="155.5" cy="108" r="6.5" style="fill: #fff;"
+    ></circle>
+    <path
+      id="eye-right-line"
+      d="M142,108c6-7,21-7,27,0-6,7-20,7-27,0Z"
+      style="fill: none; stroke: #000; stroke-miterlimit: 10; stroke-width: 2px;"
+    ></path>
+    <path
+      id="hair-static-front"
+      d="M70,82s64-6,79-24c0,0,12,23,37,24-1-34-22-59-58-59s-59,26-58,59Z"
+    ></path>
+    <path
+      id="hair-dynamic-front"
+      d="M145,77c-1-2-1-8-1-8-4,8-11,15-20,20,0-17.3,17-35,25-35,3,5,3,18-4,23Z"
+    ></path>
+  </svg>
+</div>
+
+<style>
+  div {
+    width: 100%;
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid red;
+  }
+  svg {
+    transform: scale(2);
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+
+  const area = document.querySelector<HTMLDivElement>("#interactive-area");
+  const svg = document.querySelector<SVGSVGElement>("#head");
+  const eyeRight = document.querySelector<SVGSVGElement>("#eye-right");
+  const eyeLeft = document.querySelector<SVGSVGElement>("#eye-left");
+  const eyeRightFill = document.querySelector<SVGSVGElement>("#eye-right-fill");
+  const eyeRightLine = document.querySelector<SVGSVGElement>("#eye-right-line");
+  const eyeLeftFill = document.querySelector<SVGSVGElement>("#eye-left-fill");
+  const eyeLeftLine = document.querySelector<SVGSVGElement>("#eye-left-line");
+  const hairDynamicFront = document.querySelector<SVGSVGElement>(
+    "#hair-dynamic-front",
+  );
+  const hairDynamicBack1 = document.querySelector<SVGSVGElement>(
+    "#hair-dynamic-back-1",
+  );
+  const hairDynamicBack2 = document.querySelector<SVGSVGElement>(
+    "#hair-dynamic-back-2",
+  );
+  const hairDynamicBack3 = document.querySelector<SVGSVGElement>(
+    "#hair-dynamic-back-3",
+  );
+  const hairDynamicBack4 = document.querySelector<SVGSVGElement>(
+    "#hair-dynamic-back-4",
+  );
+
+  if (
+    hairDynamicFront &&
+    hairDynamicBack1 &&
+    hairDynamicBack2 &&
+    hairDynamicBack3 &&
+    hairDynamicBack4
+  ) {
+    gsap.set([hairDynamicFront, hairDynamicBack1, hairDynamicBack2], {
+      transformOrigin: "90% 10%",
+    });
+    gsap.set([hairDynamicBack3, hairDynamicBack4], {
+      transformOrigin: "32% 20%",
+    });
+
+    const hairMove = (hairObject: SVGSVGElement) => {
+      return gsap
+        .timeline()
+        .to(hairObject, {
+          rotation: 5,
+          scaleY: 1.03,
+          duration: 1,
+          ease: "power1.inOut",
+        })
+        .to(hairObject, {
+          rotation: 0,
+          scaleY: 1,
+          duration: 0.5,
+          ease: "power1.inOut",
+        });
+    };
+
+    function scheduleHairMove(hairObjects: SVGSVGElement[]) {
+      const tl = gsap.timeline({
+        delay: gsap.utils.random(2, 6),
+        onComplete: () => scheduleHairMove(hairObjects),
+      });
+
+      hairObjects.forEach((hairObject, index) => {
+        tl.add(hairMove(hairObject), index * 0.3);
+      });
+    }
+
+    scheduleHairMove([
+      hairDynamicFront,
+      hairDynamicBack1,
+      hairDynamicBack2,
+      hairDynamicBack3,
+      hairDynamicBack4,
+    ]);
+  }
+
+  if (eyeRightFill && eyeRightLine && eyeLeftFill && eyeLeftLine) {
+    const blink = () => {
+      const tl = gsap.timeline();
+
+      tl.to([eyeRightFill, eyeRightLine, eyeLeftFill, eyeLeftLine], {
+        scaleY: 0.1,
+        duration: 0.08,
+        transformOrigin: "center",
+      }).to([eyeRightFill, eyeRightLine, eyeLeftFill, eyeLeftLine], {
+        scaleY: 1,
+        duration: 0.12,
+      });
+
+      if (Math.random() < 0.2) {
+        tl.to({}, { duration: 0.12 })
+          .to([eyeRightFill, eyeRightLine, eyeLeftFill, eyeLeftLine], {
+            scaleY: 0.1,
+            duration: 0.07,
+          })
+          .to([eyeRightFill, eyeRightLine, eyeLeftFill, eyeLeftLine], {
+            scaleY: 1,
+            duration: 0.1,
+          });
+      }
+    };
+
+    function scheduleBlink() {
+      gsap.delayedCall(gsap.utils.random(2, 6), () => {
+        blink();
+        scheduleBlink();
+      });
+    }
+
+    scheduleBlink();
+  }
+  if (area && svg && eyeRight && eyeLeft) {
+    const maxX = 10;
+    const maxY = 4;
+
+    const rightX = gsap.quickTo(eyeRight, "x", {
+      duration: 0.35,
+      ease: "power3.out",
+    });
+
+    const rightY = gsap.quickTo(eyeRight, "y", {
+      duration: 0.35,
+      ease: "power3.out",
+    });
+
+    const leftX = gsap.quickTo(eyeLeft, "x", {
+      duration: 0.35,
+      ease: "power3.out",
+    });
+
+    const leftY = gsap.quickTo(eyeLeft, "y", {
+      duration: 0.35,
+      ease: "power3.out",
+    });
+
+    area.addEventListener("pointermove", (event) => {
+      const bounds = svg.getBoundingClientRect();
+
+      // mouse position relative to the SVG
+      const mouseX = event.clientX - bounds.left;
+      const mouseY = event.clientY - bounds.top;
+
+      // center of the SVG
+      const centerX = bounds.width / 2;
+      const centerY = bounds.height / 2;
+
+      // direction from center to cursor
+      const deltaX = mouseX - centerX;
+      const deltaY = mouseY - centerY;
+
+      // normalize to roughly -1 ... 1
+      const normalizedX = deltaX / centerX;
+      const normalizedY = deltaY / centerY;
+
+      // limit eye movement
+      const x = gsap.utils.clamp(-maxX, maxX, normalizedX * maxX);
+
+      const y = gsap.utils.clamp(-maxY, maxY, normalizedY * maxY);
+
+      rightX(x);
+      rightY(y);
+
+      leftX(x);
+      leftY(y);
+    });
+  }
+</script>
