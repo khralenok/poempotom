@@ -1,0 +1,27 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import PoemNavigation from '../components/PoemNavigation.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import { sitePath } from '../lib/urls';
+import { getCounterpart, poemUrl, type Poem } from '../lib/poems';
+
+interface Props { poem: Poem; poems: Poem[]; }
+const { poem, poems } = Astro.props;
+const counterpart = await getCounterpart(poem);
+const alternates = [poem, ...(counterpart ? [counterpart] : [])].map((entry) => ({ lang: entry.data.lang, href: poemUrl(entry) }));
+---
+
+<BaseLayout title={poem.data.title} lang={poem.data.lang} alternates={alternates} pageType="poem">
+  <SiteHeader lang={poem.data.lang} languageHref={counterpart ? poemUrl(counterpart) : undefined} />
+  <main class="container poem-layout">
+    <div class="illustration"><img src={sitePath(poem.data.illustration)} alt="" width="1024" height="1024" /></div>
+    <section class="poem-container" aria-label={poem.data.lang === 'en' ? `Read ${poem.data.title}` : `Читать: ${poem.data.title}`}>
+      <div class="poem-content">
+        <h1>{poem.data.title}</h1>
+        <article class="poem" aria-label={poem.data.title}><slot /></article>
+      </div>
+    </section>
+  </main>
+  <PoemNavigation poem={poem} poems={poems} />
+</BaseLayout>
+

@@ -1,0 +1,36 @@
+---
+import '../styles/global.css';
+import { sitePath } from '../lib/urls';
+
+interface Props {
+  title: string;
+  lang?: 'ru' | 'en';
+  dark?: boolean;
+  pageType?: 'home' | 'poem' | 'error';
+  alternates?: { lang: 'ru' | 'en'; href: string }[];
+}
+
+const { title, lang = 'en', dark = false, pageType = 'home', alternates = [] } = Astro.props;
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/x-icon" href={sitePath('/img/favicon.ico')} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;1,400&family=Oswald:wght@400;500;600&display=swap" rel="stylesheet" />
+    <title>{title}</title>
+    {alternates.map((alternate) => <link rel="alternate" hreflang={alternate.lang} href={alternate.href} />)}
+  </head>
+  <body class:list={[`${pageType}-page`, { dark }]}>
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  body.dark { background-color: #151419; color: white; }
+  .dark a { text-decoration: none; color: white; }
+</style>

@@ -1,0 +1,18 @@
+---
+import { homeUrl, poemUrl, type Poem } from '../lib/poems';
+
+interface Props { poem: Poem; poems: Poem[]; }
+const { poem, poems } = Astro.props;
+const index = poems.findIndex((entry) => entry.id === poem.id);
+const previous = poems[index - 1];
+const next = poems[index + 1];
+const labels = poem.data.lang === 'ru'
+  ? ['Предыдущий стих', 'Все стихи', 'Следующий стих']
+  : ['Previous poem', 'All poems', 'Next poem'];
+---
+
+<nav class="menu" aria-label={poem.data.lang === 'ru' ? 'Навигация' : 'Navigation'}>
+  {previous ? <a id="previous" href={poemUrl(previous)}><span class="nav-label">← {labels[0]}</span><span>{previous.data.title}</span></a> : <span class="nav-placeholder" aria-hidden="true" />}
+  <a id="home" href={homeUrl(poem.data.lang)}>{labels[1]}</a>
+  {next ? <a id="next" href={poemUrl(next)}><span class="nav-label">{labels[2]} →</span><span>{next.data.title}</span></a> : <span class="nav-placeholder" aria-hidden="true" />}
+</nav>

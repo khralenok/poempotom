@@ -1,0 +1,72 @@
+*, *::before, *::after { box-sizing: border-box; }
+:root { --ink: #151922; --accent: #ee4b2b; }
+html { min-width: 0; }
+body { margin: 0; min-height: 100svh; font-family: 'Open Sans', sans-serif; color: var(--ink); background: white; line-height: 1.6; }
+h1, .wordmark { font-family: 'Oswald', sans-serif; font-weight: 500; line-height: 1.15; }
+h1 { margin: 0 0 32px; font-size: clamp(36px, 4vw, 52px); overflow-wrap: anywhere; }
+.container { width: min(1200px, 100%); margin-inline: auto; min-width: 0; }
+.site-header { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: calc(20px + env(safe-area-inset-top, 0px)) max(32px, env(safe-area-inset-right, 0px)) 20px max(32px, env(safe-area-inset-left, 0px)); }
+.wordmark { display: inline-flex; align-items: center; min-height: 44px; color: inherit; text-decoration: none; font-size: 30px; white-space: nowrap; }
+.wordmark-icon { flex: none; margin-right: 10px; }
+.wordmark-lettering > span { color: var(--accent); }
+.illustration { display: flex; align-items: center; justify-content: center; min-width: 0; }
+.illustration img { display: block; width: 100%; height: auto; }
+.home-layout { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); align-items: center; gap: 48px; padding: 48px 48px max(48px, env(safe-area-inset-bottom, 0px)); }
+.home-layout .illustration { width: 100%; max-width: 560px; }
+.home-contents { min-width: 0; }
+.collection-intro { max-width: 48ch; margin: 0 0 24px; color: #b9b9bf; font-size: 15px; line-height: 1.7; }
+.profile-links { display: flex; flex-wrap: wrap; gap: 4px 20px; margin-top: 24px; }
+.profile-links a { display: inline-flex; align-items: center; min-height: 44px; font-size: 14px; }
+.dark .profile-links a { color: #b9b9bf; text-decoration: underline; text-underline-offset: 4px; }
+.dark .profile-links a:hover { color: var(--accent); }
+.home-contents h1 { margin-bottom: 16px; }
+.poems-list { list-style: none; margin: 0; padding: 0; }
+.poems-list a { display: grid; grid-template-columns: 28px minmax(0, 1fr) 20px; align-items: baseline; gap: 16px; min-height: 44px; padding: 10px 0; border-bottom: 1px solid #ffffff20; font-size: 18px; overflow-wrap: anywhere; }
+.poem-number { font-size: 12px; color: #9d9da6; font-variant-numeric: tabular-nums; }
+.list-arrow { color: #9d9da6; }
+.poems-list a:hover, .dark .poems-list a:hover { color: var(--accent); }
+.poem-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); align-items: start; gap: 56px; padding: 56px 48px 64px; }
+.poem-layout .illustration { margin-top: 32px; }
+.poem-container { min-width: 0; }
+.poem-content { width: 100%; }
+.poem { font-size: 18px; line-height: 1.8; overflow-wrap: anywhere; }
+.poem p { margin: 0; }
+.poem p + p { margin-top: 1.5em; }
+.menu { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 32px; width: min(1104px, calc(100% - 96px)); margin: 0 auto; padding: 32px 0 max(48px, env(safe-area-inset-bottom, 0px)); border-top: 1px solid #15192226; }
+.menu a { display: flex; flex-direction: column; justify-content: center; min-height: 44px; min-width: 44px; color: inherit; text-decoration: none; overflow-wrap: anywhere; }
+.menu a:hover { color: var(--accent); }
+.nav-label { font-size: 12px; color: #666; margin-bottom: 4px; }
+#home { font-size: 14px; text-decoration: underline; text-underline-offset: 4px; }
+#next { text-align: right; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.error-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; min-height: 100svh; padding: 20px; }
+.error-message { padding: 24px; min-width: 0; }
+@media (width < 960px) {
+  .home-layout { gap: 32px; padding: 32px 32px 48px; }
+  .poem-layout { gap: 32px; padding: 40px 32px 48px; }
+  .poem { font-size: 17px; }
+  .menu { width: calc(100% - 64px); }
+}
+@media (width < 760px) {
+  .site-header { padding-inline: max(20px, env(safe-area-inset-left, 0px)); }
+  .wordmark { font-size: 26px; }
+  .home-layout { grid-template-columns: minmax(0, 1fr); gap: 32px; width: min(520px, 100%); padding: 16px 24px 32px; }
+  .home-layout .illustration { width: min(280px, 70%); margin-inline: auto; }
+  .poem-layout { display: flex; flex-direction: column; gap: 24px; width: min(600px, 100%); padding: 24px 24px 48px; }
+  .poem-container { display: contents; }
+  .poem-content { display: contents; }
+  .poem-content h1 { order: -1; margin: 0; }
+  .poem-layout .illustration { width: min(240px, 65%); margin: 0 auto 8px; }
+  .poem { width: 100%; font-size: 17px; }
+  .menu { grid-template-columns: minmax(0, 1fr); gap: 16px; width: min(552px, calc(100% - 48px)); }
+  .nav-placeholder { display: none; }
+  #home { order: 1; }
+  #next { text-align: left; }
+  .error-layout { grid-template-columns: minmax(0, 1fr); }
+  .error-layout .illustration { width: min(320px, 100%); margin-inline: auto; }
+}
+@media (width < 360px) {
+  .site-header { gap: 8px; padding-inline: 16px; }
+  .wordmark { font-size: 22px; }
+  .wordmark-icon { margin-right: 8px; }
+}

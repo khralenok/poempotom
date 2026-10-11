@@ -1,0 +1,34 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from './SiteHeader.astro';
+import { sitePath } from '../lib/urls';
+import { getPoems, poemUrl, homeUrl } from '../lib/poems';
+
+interface Props { lang?: 'ru' | 'en'; }
+const { lang = 'en' } = Astro.props;
+const poems = await getPoems(lang);
+const languages = ['en', 'ru'] as const;
+const alternates = languages.map((language) => ({ lang: language, href: homeUrl(language) }));
+---
+
+<BaseLayout title={lang === 'ru' ? 'Поем потом' : 'Poem Potom'} lang={lang} dark alternates={alternates}>
+  <SiteHeader lang={lang} languageHref={homeUrl(lang === 'en' ? 'ru' : 'en')} />
+  <main class="container home-layout">
+    <div class="illustration main"><img src={sitePath('/img/main.svg')} alt="" width="1024" height="1024" /></div>
+    <section class="home-contents" aria-labelledby="collection-title">
+      <h1 id="collection-title">{lang === 'en' ? 'Poems' : 'Стихи'}</h1>
+      <p class="collection-intro">{lang === 'en'
+        ? 'An illustrated webzine by Grigorii Khralenok: ten poems about longing, parting, and the strange details of everyday life. Read in English or in the original Russian.'
+        : 'Иллюстрированный веб-зин Григория Храленка: десять стихотворений о тоске, расставаниях и странных деталях повседневной жизни. Читайте в оригинале или в английском переводе.'}</p>
+      <ol class="poems-list">
+        {poems.map((poem) => <li><a href={poemUrl(poem)}><span class="poem-number" aria-hidden="true">{String(poem.data.order).padStart(2, '0')}</span><span>{poem.data.listTitle ?? poem.data.title}</span><span class="list-arrow" aria-hidden="true">↗</span></a></li>)}
+      </ol>
+      <nav class="profile-links" aria-label={lang === 'en' ? 'Find me elsewhere' : 'Мои страницы'}>
+        <a href="https://khralenok.com/">{lang === 'en' ? 'Portfolio' : 'Портфолио'}</a>
+        <a href="https://www.instagram.com/khralenok/">Instagram</a>
+        <a href="https://khralenok.substack.com/">Substack</a>
+        <a href="https://www.linkedin.com/in/khralenok/">LinkedIn</a>
+      </nav>
+    </section>
+  </main>
+</BaseLayout>

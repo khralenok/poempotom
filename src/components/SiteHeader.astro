@@ -1,0 +1,16 @@
+---
+import LanguageSwitch from './LanguageSwitch.astro';
+import { homeUrl } from '../lib/poems';
+interface Props { lang: 'ru' | 'en'; languageHref?: string; }
+const { lang, languageHref } = Astro.props;
+---
+<header class="site-header container">
+  <a class="wordmark" href={homeUrl(lang)}>
+    <svg class="wordmark-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+      <circle cx="16" cy="16" r="16" fill="#ee4b2b" />
+      <path fill="#fff" d="m14 9 1-2h3l1 2-1 2h-3zM5 9l1-2h3l1 2-1 2H6zm20 5v8l-1 3-2 1-3 1-3-1-2-2-1-4v-3H6v-3zm-9 5 1 3 2 2 3-2v-5h-6z" />
+    </svg>
+    <span class="wordmark-lettering">{lang === 'en' ? 'PoemPotom' : 'ПоемПотом'}</span>
+  </a>
+  {languageHref && <LanguageSwitch lang={lang} href={languageHref} />}
+</header>

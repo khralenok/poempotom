@@ -1,0 +1,31 @@
+---
+interface Props { lang: 'ru' | 'en'; href: string; }
+const { lang, href } = Astro.props;
+const target = lang === 'en' ? 'ru' : 'en';
+---
+<nav class="language-switch" aria-label={lang === 'en' ? 'Language' : 'Язык'}>
+  <span aria-current="page" lang={lang}>{lang === 'en' ? 'EN' : 'RU'}</span>
+  <span aria-hidden="true"> / </span>
+  <a href={href} lang={target} hreflang={target} aria-label={target === 'ru' ? 'Читать по-русски' : 'Read in English'}>{target === 'en' ? 'EN' : 'RU'}</a>
+</nav>
+
+<style>
+  .language-switch {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: #151922;
+    font-size: 14px;
+  }
+  .language-switch a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
+    color: inherit;
+    text-decoration: underline;
+  }
+  .language-switch span[aria-current] { font-weight: 600; }
+  :global(.dark) .language-switch { color: white; }
+</style>
