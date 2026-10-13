@@ -21,7 +21,7 @@ const alternates = languages.map((language) => ({ lang: language, href: homeUrl(
         ? 'An illustrated webzine by Grigorii Khralenok: ten poems about longing, parting, and the strange details of everyday life. Read in English or in the original Russian.'
         : 'Иллюстрированный веб-зин Григория Храленка: десять стихотворений о тоске, расставаниях и странных деталях повседневной жизни. Читайте в оригинале или в английском переводе.'}</p>
       <ol class="poems-list">
-        {poems.map((poem) => <li><a href={poemUrl(poem)}><span class="poem-number" aria-hidden="true">{String(poem.data.order).padStart(2, '0')}</span><span>{poem.data.listTitle ?? poem.data.title}</span><span class="list-arrow" aria-hidden="true">↗</span></a></li>)}
+        {poems.map((poem) => <li><a href={poemUrl(poem)}><span class="poem-number" aria-hidden="true">{String(poem.data.order).padStart(2, '0')}</span><span>{poem.data.listTitle ?? poem.data.title}</span><span class="list-arrow" aria-hidden="true">&#x2197;&#xFE0E;</span></a></li>)}
       </ol>
       <nav class="profile-links" aria-label={lang === 'en' ? 'Find me elsewhere' : 'Мои страницы'}>
         <a href="https://khralenok.com/">{lang === 'en' ? 'Portfolio' : 'Портфолио'}</a>
